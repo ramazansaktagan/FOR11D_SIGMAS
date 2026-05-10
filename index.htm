@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Шақыру | 11 «Г» сыныбы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fdf6ee;
+      --gold: #c9a96e;
+      --dark: #1a1a2e;
+      --warm: #e8d5b7;
+      --accent: #8b5e3c;
+      --soft: #f5ebe0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--cream);
+      font-family: 'Nunito', sans-serif;
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px 60px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      opacity: 0.18;
+      filter: sepia(0.3);
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(253,246,238,0.85) 0%,
+        rgba(232,213,183,0.75) 40%,
+        rgba(253,246,238,0.9) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .kz-flag {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .hero-sub {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .hero-title em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-class {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--accent);
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 30px;
+    }
+
+    .hero-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #444;
+      font-weight: 400;
+    }
+
+    /* ─── PHOTOS STRIP ─── */
+    .photos-strip {
+      display: flex;
+      gap: 12px;
+      padding: 40px 24px;
+      overflow-x: auto;
+      background: var(--soft);
+      scroll-snap-type: x mandatory;
+    }
+
+    .photos-strip::-webkit-scrollbar { height: 4px; }
+    .photos-strip::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    .photo-card {
+      flex: 0 0 calc(33% - 8px);
+      min-width: 220px;
+      border-radius: 16px;
+      overflow: hidden;
+      scroll-snap-align: start;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+      position: relative;
+      aspect-ratio: 3/4;
+      background: var(--warm);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-card:hover img { transform: scale(1.04); }
+
+    .photo-card .photo-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(26,26,46,0.6));
+      color: white;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 20px 14px 12px;
+      font-weight: 600;
+    }
+
+    /* ─── INFO CARDS ─── */
+    .info-section {
+      padding: 60px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(201,169,110,0.2);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .card-icon { font-size: 2rem; margin-bottom: 12px; }
+    .card-label {
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .card-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--dark);
+    }
+    .card-note {
+      font-size: 0.88rem;
+      color: #777;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* ─── MESSAGE ─── */
+    .message-section {
+      background: linear-gradient(135deg, var(--dark) 0%, #2d2052 100%);
+      color: white;
+      padding: 70px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message-section::before {
+      content: '💙';
+      position: absolute;
+      font-size: 15rem;
+      opacity: 0.04;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .message-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .message-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 3.5vw, 1.85rem);
+      line-height: 1.7;
+      color: var(--warm);
+      margin-bottom: 28px;
+    }
+
+    .message-sig {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .hearts {
+      font-size: 1.4rem;
+      letter-spacing: 6px;
+      margin-top: 16px;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--soft);
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.85rem;
+      color: #aaa;
+      letter-spacing: 1px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .hero-bg { grid-template-columns: 1fr; }
+      .hero-bg img:not(:first-child) { display: none; }
+      .photo-card { flex: 0 0 78vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="ФОТО_1" alt="фото 1"/>
+      <img src="ФОТО_2" alt="фото 2"/>
+      <img src="ФОТО_3" alt="фото 3"/>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="kz-flag">🇰🇿</div>
+      <p class="hero-sub">Отан қорғаушылар күні · 7 мамыр</p>
+      <h1 class="hero-title">Мерекеңізбен,<br/><em>ерлер!</em></h1>
+      <p class="hero-class">11 «Г» сыныбының қыздарынан</p>
+      <div class="divider"></div>
+      <p class="hero-text">
+        Сендерді 7 мамыр — Отан қорғаушылар күнімен шын жүректен құттықтаймыз!<br/>
+        Әрқашан мықты, батыл, намысты болып, армандарыңызға жете беріңіздер.
+        Дендеріңізге саулық, оқуда табыс, өмірлеріңізге бақыт пен сәттілік тілейміз! 💙
+      </p>
+    </div>
+  </section>
+
+  <!-- PHOTO STRIP -->
+  <section class="photos-strip">
+    <div class="photo-card">
+      <img src="Photo/5190408797321630933.jpg" alt="Сурет 1"/>
+      <div class="photo-label">Жолдастар</div>
+    </div>
+    <div class="photo-card">
+      <img src="Photo/5190408797321630932.jpg" alt="Сурет 2"/>
+      <div class="photo-label">Студия</div>
+    </div>
+    <div class="photo-card">
+      <img src="Photo/5190408797321630934.jpg" alt="Сурет 3"/>
+      <div class="photo-label">Сынып</div>
+    </div>
+  </section>
+
+  <!-- INFO CARDS -->
+  <section class="info-section">
+    <h2 class="section-heading">Коттеджге шақыру 🏡</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">📅</div>
+        <div class="card-label">Күні</div>
+        <div class="card-value">11 мамыр</div>
+        <div class="card-note">Жексенбі</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🕐</div>
+        <div class="card-label">Уақыты</div>
+        <div class="card-value">Сағат 13:00</div>
+        <div class="card-note">Кешікпей келіңдер!</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📍</div>
+        <div class="card-label">Мекенжай</div>
+        <div class="card-value">Алтындала 2а</div>
+        <div class="card-note">Коттедж</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">👕</div>
+        <div class="card-label">Дресс-код</div>
+        <div class="card-value">Ыңғайлы киім</div>
+        <div class="card-note">Casual, еркін стиль</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧖🏻‍♀️</div>
+        <div class="card-label">Баня</div>
+        <div class="card-value">Болады!</div>
+        <div class="card-note">Керек заттарыңды алып кел</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧦</div>
+        <div class="card-label">Ескерту</div>
+        <div class="card-value">Тапочка / Носки</div>
+        <div class="card-note">Ауа салқын, еден сәл суық болады</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MESSAGE -->
+  <section class="message-section">
+    <div class="message-inner">
+      <p class="message-quote">
+        «Дендеріңізге саулық,<br/>оқуда табыс,<br/>өмірлеріңізге бақыт пен сәттілік тілейміз!»
+      </p>
+      <p class="message-sig">11 «Г» сыныбының қыздары</p>
+      <div class="hearts">💙 💙 💙</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Барлығыңды күтеміз! &nbsp;💕</p>
+  </footer>
+
+</body>
+</html>
